@@ -4,7 +4,8 @@ import React, { useEffect, useState } from "react";
 function App() {
   const [groupMembers, setGroupMembers] = useState([]);
 
-  let url = "http://localhost:3001/members";
+  const backend_port = process.env.REACT_APP_BACKEND_PORT | 3001;
+  let url = `http://localhost:${backend_port}/members`;
 
   useEffect(() => {
     fetch(url)
@@ -17,7 +18,7 @@ function App() {
     <div className="App">
       <h2>Budget Buddy Application</h2>
 
-      <div class="groupMembers">
+      <div className="groupMembers">
         <h3>Group Members</h3>
         <ul>
           {groupMembers.map((member, index) => (
