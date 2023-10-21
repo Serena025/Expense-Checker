@@ -23,6 +23,10 @@ app.use("/incomes", incomeController);
 const expenseController = require("./controllers/expenseController");
 app.use("/expenses", expenseController);
 
+// Category Route
+const categoryController = require("./controllers/categoryController");
+app.use("/categories", categoryController);
+
 // Group Members
 app.get("/members", function (req, res) {
   const group_members = [
