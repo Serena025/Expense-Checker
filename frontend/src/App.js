@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 function App() {
   const [groupMembers, setGroupMembers] = useState([]);
 
-  const backend_port = process.env.REACT_APP_BACKEND_PORT | 3001;
+  const backend_port = process.env.REACT_APP_BACKEND_PORT || 3001;
   let url = `http://localhost:${backend_port}/members`;
 
   useEffect(() => {
