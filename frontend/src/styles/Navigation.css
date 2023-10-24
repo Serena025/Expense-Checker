@@ -1,0 +1,15 @@
+nav {
+  background-color: lightblue; 
+  padding: 10px; 
+  font-size: 25px;
+}
+
+nav a {
+  text-decoration: none; 
+  color: darkgreen; 
+  margin-right: 20px; 
+}
+
+nav a:hover {
+  color: red; 
+}
