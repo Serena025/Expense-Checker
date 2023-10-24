@@ -4,11 +4,13 @@ const cors = require("cors");
 
 // Initialize the app
 const app = express();
+const defineCurrentUser = require("./middleware/defineCurrentUser");
 
 require("dotenv").config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
+app.use(defineCurrentUser);
 
 // Create a homepage route.
 app.get("/", function (req, res) {
@@ -27,6 +29,9 @@ app.use("/categories", categoryController);
 // Users Route
 const userController = require("./controllers/userController");
 app.use("/users", userController);
+// Authentication Route
+const authenticationController = require("./controllers/authenticationController");
+app.use("/authentication", authenticationController);
 
 // Group Members
 app.get("/members", function (req, res) {
@@ -43,5 +48,5 @@ app.get("/members", function (req, res) {
 
 // Listen for connections.
 app.listen(process.env.PORT, function () {
-  console.log("Backend server is running");
+  console.log(`Backend server is running on port ${process.env.PORT}`);
 });
