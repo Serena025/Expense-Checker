@@ -18,14 +18,15 @@ app.get("/", function (req, res) {
 // Income Route
 const incomeController = require("./controllers/incomeController");
 app.use("/incomes", incomeController);
-
 // Expense Route
 const expenseController = require("./controllers/expenseController");
 app.use("/expenses", expenseController);
-
 // Category Route
 const categoryController = require("./controllers/categoryController");
 app.use("/categories", categoryController);
+// Users Route
+const userController = require("./controllers/userController");
+app.use("/users", userController);
 
 // Group Members
 app.get("/members", function (req, res) {
