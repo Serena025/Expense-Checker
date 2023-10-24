@@ -1,4 +1,5 @@
 const expenseRouter = require("express").Router();
+const db = require("../models")
 
 // Gets the list of all expenses
 expenseRouter.get("/", async (req, res) => {
