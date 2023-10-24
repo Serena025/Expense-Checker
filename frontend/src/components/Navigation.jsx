@@ -6,9 +6,12 @@ function Navigation() {
   return (
     <nav>
       <Link to="/">Home</Link>
+       <Link to="/dashboard">Dashboard</Link>
+       <Link to="/expenses">expenses</Link>
       <Link to="/login">Login</Link>
       <Link to="/signup">Sign up</Link>
       <Link to="/about">About</Link>
+     
     </nav>
   );
 }
