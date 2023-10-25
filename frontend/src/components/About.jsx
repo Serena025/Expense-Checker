@@ -11,7 +11,7 @@ function About() {
       .then((response) => response.json())
       .then((data) => setGroupMembers(data))
       .catch((error) => console.error("Error fetching data:", error));
-  });
+  }, []);
 
   return (
     <div className="App">
