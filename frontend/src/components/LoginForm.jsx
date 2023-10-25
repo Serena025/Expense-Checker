@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../App";
 
 function LoginForm() {
   const [userName, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext);
 
   async function handleLogin(e) {
     // Prevent normal action
@@ -27,6 +29,7 @@ function LoginForm() {
     const data = await response.json();
     if (response.status === 200) {
       localStorage.setItem("token", data.token);
+      setUser(data.user);
       navigate("/dashboard");
     } else {
       setErrorMessage(data.message);

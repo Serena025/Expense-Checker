@@ -19,12 +19,12 @@ authenticationRouter.post("/", async (req, res) => {
     const result = await jwt.encode(process.env.JWT_SECRET, {
       id: user.userId,
     });
+    console.log("MAR 1: ", result);
     res.json({ user: user, token: result.value, message: "Login Successful" });
   }
 });
 
 authenticationRouter.get("/profile", async (req, res) => {
-  console.log("ESH: 1");
   res.json(req.currentUser);
 });
 
