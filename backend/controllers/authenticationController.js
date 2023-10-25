@@ -17,7 +17,7 @@ authenticationRouter.post("/", async (req, res) => {
     });
   } else {
     const result = await jwt.encode(process.env.JWT_SECRET, {
-      id: user.userId,
+      username: user.username,
     });
     console.log("MAR 1: ", result);
     res.json({ user: user, token: result.value, message: "Login Successful" });

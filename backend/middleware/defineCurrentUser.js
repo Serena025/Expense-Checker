@@ -9,11 +9,11 @@ async function defineCurrentUser(req, res, next) {
     if (method == "Bearer") {
       const result = await jwt.decode(process.env.JWT_SECRET, token);
       console.log(result);
-      const { id } = result.value;
-      if (id) {
+      const { username } = result.value;
+      if (username) {
         let user = await User.findOne({
           where: {
-            userId: id,
+            username: username,
           },
         });
 
