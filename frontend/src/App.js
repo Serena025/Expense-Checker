@@ -6,7 +6,6 @@ import LoginForm from "./components/LoginForm";
 import SignUpForm from "./components/Signup";
 import About from "./components/About";
 import Expenses from "./components/Expenses";
-
 function App() {
   return (
     <Router>

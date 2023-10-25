@@ -8,8 +8,12 @@ function Navigation() {
       <Link to="/">Home</Link>
        <Link to="/dashboard">Dashboard</Link>
        <Link to="/expenses">expenses</Link>
-      <Link to="/login">Login</Link>
-      <Link to="/signup">Sign up</Link>
+<button variant="primary">
+  <Link to="/login">Login form</Link>
+</button>
+<button variant="primary">
+  <Link to="/signup">Sign up</Link>
+</button>
       <Link to="/about">About</Link>
      
     </nav>
