@@ -1,7 +1,18 @@
 .App {
   text-align: center;
-}
 
+}
 .groupMembers ul {
   list-style-type: none;
+}
+
+.homepage {
+  text-align: center;
+  background:url("https://images.unsplash.com/photo-1632406897767-2319bcedac9c?auto=format&fit=crop&q=80&w=2970&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+.homepage{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }

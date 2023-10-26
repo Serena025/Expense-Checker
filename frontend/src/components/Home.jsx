@@ -1,7 +1,8 @@
 function Home() {
     return (
-      <div>        
-        <h2>Homepage for the Budget Buddy Application</h2>
+      <div className="homepage">        
+        <h1>Welcome to Budget Buddy</h1>
+        <p>"Master Your Finances with Our Expense Tracking!"</p>
       </div>
     );
   }
