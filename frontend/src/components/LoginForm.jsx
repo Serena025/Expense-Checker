@@ -39,7 +39,8 @@ function LoginForm() {
   }
 
   return (
-    <div>
+
+      <div className="login-container">
       <h1>Login</h1>
       {errorMessage !== null ? <div>{errorMessage}</div> : null}
       <form onSubmit={handleLogin}>
@@ -62,8 +63,7 @@ function LoginForm() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-
-        <button type="button" onClick={handleLogin}>
+        <button type="button" onClick={handleLogin} className="login-button">
           Login
         </button>
       </form>
