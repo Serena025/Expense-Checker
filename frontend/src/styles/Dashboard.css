@@ -1,0 +1,88 @@
+
+
+
+
+
+nav.nav-link{
+    text-align: center;
+    background-color: #002d5a; 
+    padding: 0px 0px 0px 0px;
+    font-size: 25px;
+    font-weight: 600;
+    color: white;
+
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    flex-wrap: wrap;
+    max-width: 100%;
+  
+  }
+  
+  .container{
+    color: white;
+
+    display: flex;
+    flex-direction:row ;
+    justify-content:flex-start ;
+  
+    flex-wrap: wrap;
+    max-width: 75%;
+    margin: 0;
+  }
+  
+  .userLoginItems{
+    max-width: 20%;
+  
+  
+    
+    
+  }
+  
+  .link-to{
+    width: 150px;
+    height: 10vh;
+    text-align: center;
+    border-radius: 10%;
+    color: white;
+    margin: 0 2px;
+  
+  }
+  
+  .link-to a{
+    width: px;
+    height: vh;
+    text-align: center;
+    border-radius: 10%;
+    margin: 2px auto;
+    background-color: #002d5a; 
+    background-color: ;
+    text-shadow: 2px 2px 3px rgb(238, 238, 217);
+    font-size: 1.2em;
+  }
+  
+  nav {
+    background-color: #002d5a; 
+    padding: 10px; 
+    font-size: 25px;
+  }
+  
+  nav a {
+    text-decoration: none; 
+    color: white; 
+    margin-right: 20px; 
+    cursor: pointer;
+  }
+  
+  nav a:hover {
+    background-color: #0b447c; 
+    color: #d9e6f2; 
+  }
+  
+  .userLoginItems {
+    float: right;
+    text-decoration: none; 
+    color: white; 
+    margin-right: 20px; 
+    cursor: pointer;
+  }

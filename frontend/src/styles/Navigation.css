@@ -1,20 +1,95 @@
+
+
+
+
+
+nav.nav-link{
+  text-align: center;
+  background-color: rgb(164, 221, 240); 
+  padding: 0px 0px 0px 0px;
+  font-size: 25px;
+  font-weight: 600;
+
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  flex-wrap: wrap;
+  max-width: 100%;
+
+}
+
+.container{
+  
+  display: flex;
+  flex-direction:row ;
+  justify-content:flex-start ;
+
+  flex-wrap: wrap;
+  max-width: 50%;
+  margin: 0;
+}
+
+.userLoginItems{
+  max-width: 20%;
+
+
+  
+  
+}
+
+.link-to{
+  width: 130px;
+  height: 10vh;
+  text-align: center;
+  border-radius: 10%;
+
+}
+
+.link-to a{
+  width: px;
+  height: vh;
+  text-align: center;
+  border-radius: 10%;
+  margin: 2px auto;
+  background-color: rgb(185, 202, 233);
+  text-shadow: 2px 2px 3px rgb(240, 240, 155);
+}
+
 nav {
-  background-color: lightblue; 
+  background-color: #002d5a; 
   padding: 10px; 
   font-size: 25px;
 }
 
 nav a {
   text-decoration: none; 
-  color: darkgreen; 
+  color: rgb(233, 240, 240); 
   margin-right: 20px; 
+  cursor: pointer;
 }
 
 nav a:hover {
-  color: red; 
+  color: rgb(115, 79, 221); 
 }
 
 .userLoginItems {
   float: right;
+  
 }
 
+.btn-login{
+  height: 9vh;
+  font-size: 0.8em;
+  font-weight: 400;
+  border-radius: 35px;
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 10px 15px;
+  color: rgb(75, 113, 216);
+  background-color: #c8cbee;
+  text-align: center;
+  cursor: pointer;
+
+
+}

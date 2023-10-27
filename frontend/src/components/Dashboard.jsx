@@ -1,4 +1,8 @@
-import React from 'react'
+import React from 'react';
+import Table from 'react-bootstrap/Table';
+import "../styles/Dashboard.css";
+
+
 
 const expenses = [
   { id: 1, description: 'Rent', amount: 1000, date: '2023-09-01' },
@@ -8,15 +12,13 @@ const expenses = [
 ]
 
 
-
-
 function Dashboard() {
     return (
       <div>        
         <h2>Dashboard</h2>
         <table style={{ border: '1px solid black' }}>
         <thead>
-          <tr>
+          <tr striped>
             <th style={{ border: '1px solid black', padding: '5px' }}>ID</th>
             <th style={{ border: '1px solid black', padding: '5px' }}>Description</th>
             <th style={{ border: '1px solid black', padding: '5px' }}>Amount</th>
