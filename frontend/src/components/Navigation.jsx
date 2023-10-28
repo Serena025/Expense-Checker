@@ -47,6 +47,9 @@ function Navigation() {
         <div className="link-to">
           <Link to="/income">Income</Link>
         </div>
+        <div className="link-to">
+          <Link to="/new-income">New Income</Link> 
+        </div>
         </div>
 
        

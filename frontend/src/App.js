@@ -10,6 +10,7 @@ import Income from "./components/Income";
 import Expenses from "./components/Expenses";
 import { createContext, useState, useEffect } from "react";
 import { getBackendURL } from "./common_functions";
+import NewIncomePage from './components/NewIncomePage';
 
 export const UserContext = createContext();
 
@@ -44,10 +45,12 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/expenses" element={<Expenses />} />
           <Route path="/income" element={<Income />} />
+          <Route path="/new-income" element={<NewIncomePage />} /> 
         </Routes>
       </Router>
     </UserContext.Provider>
   );
 }
+
 
 export default App;
