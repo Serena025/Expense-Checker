@@ -35,14 +35,26 @@ function Navigation() {
 
   const navigationForLoggedInUser = () => {
     return (
-      <nav>
-        <Link to="/dashboard">Dashboard</Link>
-        <Link to="/expenses">Expenses</Link>
-        <Link to="/income">Income</Link>
+    
+      <nav className="nav-link">
+        <div className="container">
+        <div className="link-to">
+          <Link to="/dashboard">Dashboard</Link>
+        </div>
+        <div className="link-to">
+          <Link to="/expenses">Expenses</Link>
+        </div>
+        <div className="link-to">
+          <Link to="/income">Income</Link>
+        </div>
+        </div>
 
+       
+
+    
         <div className="userLoginItems">
           {user.display_name}
-          <button onClick={logout}>Logout</button>
+          <button onClick={logout} className="btn-login">Logout</button>
         </div>
       </nav>
     );

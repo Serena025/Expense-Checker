@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getBackendURL } from "../common_functions";
 
 function SignupForm() {
   const [username, setUsername] = useState("");
@@ -14,7 +15,8 @@ function SignupForm() {
 
     console.log(username, password, email, displayName);
 
-    await fetch(`http://localhost:3001/users`, {
+    const url = `${getBackendURL()}/users`;
+    await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -1,0 +1,16 @@
+.expenses-1 {
+    text-align: center;
+    background: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5) ), url("https://media.istockphoto.com/id/1462932996/photo/cost-and-quality-control-business-strategy-and-project-management-concept-businessman-working.jpg?s=2048x2048&w=is&k=20&c=9d0Yv2vOMrRWxJD-YDen2z9HiQz7zSSeNUE0HcRhq9U=");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height:150vh;
+    
+  }
+
+  .expenses-1 h2{
+    font-size: 3em;
+    color: rgb(104, 86, 65);
+    font-weight: 600;
+  }
+
+ 

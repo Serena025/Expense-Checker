@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { getBackendURL } from "../common_functions";
 
 function About() {
-  const [groupMembers, setGroupMembers] = useState([]);
+  const [groupMembers, setGroupMembers] = useState([]);  
 
-  const backend_port = process.env.REACT_APP_BACKEND_PORT || 3001;
-  let url = `http://localhost:${backend_port}/members`;
-
-  useEffect(() => {
+  const url = `${getBackendURL()}/members`;
+  useEffect(() => {    
+    console.log("URL: ", url);
     fetch(url)
       .then((response) => response.json())
       .then((data) => setGroupMembers(data))

@@ -8,14 +8,14 @@ import SignUpForm from "./components/Signup";
 import About from "./components/About";
 import Expenses from "./components/Expenses";
 import { createContext, useState, useEffect } from "react";
+import { getBackendURL } from "./common_functions";
 
 export const UserContext = createContext();
 
 function App() {
   const [user, setUser] = useState(null);
 
-  const backend_port = process.env.REACT_APP_BACKEND_PORT || 3001;
-  let url = `http://localhost:${backend_port}/authentication/profile`;
+  let url = `${getBackendURL()}/authentication/profile`;
 
   useEffect(() => {
     const getLoggedInUser = async () => {

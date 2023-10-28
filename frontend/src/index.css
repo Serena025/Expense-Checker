@@ -1,3 +1,30 @@
+
+/* import a web font */
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2&family=Fredoka+One&display=swap');
+
+/*Helpers*/
+
+/*Each element with a border*/
+*{
+
+  /*border: 1px solid teal;*/
+  box-sizing: border-box;
+  
+}
+
+
 body {
-  margin: 0; 
+  margin: 0 auto;
+  
+  
+}
+@media(min-width: 600px){
+   
+  section{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+       
+  }
 }

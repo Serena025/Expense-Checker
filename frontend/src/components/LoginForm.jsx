@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
+import { getBackendURL } from "../common_functions";
 
 function LoginForm() {
   const [userName, setUsername] = useState("");
@@ -15,7 +16,8 @@ function LoginForm() {
     e.preventDefault();
 
     // Make request to backend
-    const response = await fetch(`http://localhost:3001/authentication`, {
+    const url = `${getBackendURL()}/authentication`;
+    const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -38,6 +40,7 @@ function LoginForm() {
   }
 
   return (
+    <div className="login">
       <div className="login-container">
            <div className="background-image">
       <h1 className="signup-title">Login</h1>
@@ -66,6 +69,7 @@ function LoginForm() {
           Login
         </button>
       </form>
+    </div>
     </div>
     </div>
   );
