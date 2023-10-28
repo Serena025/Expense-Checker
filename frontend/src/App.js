@@ -6,6 +6,7 @@ import Dashboard from "./components/Dashboard";
 import LoginForm from "./components/LoginForm";
 import SignUpForm from "./components/Signup";
 import About from "./components/About";
+import Income from "./components/Income";
 import Expenses from "./components/Expenses";
 import { createContext, useState, useEffect } from "react";
 import { getBackendURL } from "./common_functions";
@@ -42,6 +43,7 @@ function App() {
           <Route path="/signup" element={<SignUpForm />} />
           <Route path="/about" element={<About />} />
           <Route path="/expenses" element={<Expenses />} />
+          <Route path="/income" element={<Income />} />
         </Routes>
       </Router>
     </UserContext.Provider>
