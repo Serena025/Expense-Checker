@@ -1,21 +1,17 @@
 nav {
-  background-color: lightblue; 
+  background-color: #9d9ba6; 
   padding: 10px; 
   font-size: 25px;
 }
 
 nav a {
   text-decoration: none; 
-  color: darkgreen; 
+  color: rgb(12, 12, 12); 
   margin-right: 20px; 
 }
 
 nav a:hover {
   color: red; 
-}
-
-.userLoginItems {
-  float: right;
 }
 
 .signup-container {
@@ -34,7 +30,7 @@ nav a:hover {
   
 }
 .signup-button {
-  background-color: #898d91; 
+  background-color: #d3dbe4; 
   color: #050404;
   padding: 10px 80px; 
   border-radius: 1px solid black; 
@@ -71,6 +67,7 @@ input {
 
 }
 
+
 .login-container {
   background-color: whitesmoke;
   padding: 20px;  
@@ -92,6 +89,27 @@ input {
   border-radius: 1px solid black; 
   border-radius:10px;
   cursor: pointer;
+  margin-top: 10px;
+}
 
+.login-title {
+  font-size: 25px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+}
 
+.userLoginItems{
+  margin-right: 10px;
+  float: right;
+  
+}
+
+.userLoginItems button {
+  background-color: #922825; 
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
 }

@@ -26,7 +26,6 @@ function LoginForm() {
       }),
     });
 
-    // W
     const data = await response.json();
     if (response.status === 200) {
       localStorage.setItem("token", data.token);
@@ -39,9 +38,9 @@ function LoginForm() {
   }
 
   return (
-
       <div className="login-container">
-      <h1>Login</h1>
+           <div className="background-image">
+      <h1 className="signup-title">Login</h1>
       {errorMessage !== null ? <div>{errorMessage}</div> : null}
       <form onSubmit={handleLogin}>
         <div>
@@ -67,6 +66,7 @@ function LoginForm() {
           Login
         </button>
       </form>
+    </div>
     </div>
   );
 }
