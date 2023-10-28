@@ -1,41 +1,67 @@
-import React from 'react'
-
-const expenses = [
-  { id: 1, description: 'Rent', amount: 1000, date: '2023-09-01' },
-  { id: 2, description: 'Groceries', amount: 100, date: '2023-09-05' },
-  { id: 3, description: 'Internet Bill', amount: 50, date: '2023-09-10' },
-  { id: 4, description: 'Dinner', amount: 200, date: '2023-09-15' },
-]
-
+import React, { useState } from 'react';
 
 
 
 function Dashboard() {
-    return (
-      <div>        
-        <h2>Dashboard</h2>
-        <table style={{ border: '1px solid black' }}>
-        <thead>
-          <tr>
-            <th style={{ border: '1px solid black', padding: '5px' }}>ID</th>
-            <th style={{ border: '1px solid black', padding: '5px' }}>Description</th>
-            <th style={{ border: '1px solid black', padding: '5px' }}>Amount</th>
-            <th style={{ border: '1px solid black', padding: '5px' }}>Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {expenses.map((expense) => (
-            <tr key={expense.id}>
-              <td style={{ border: '1px solid black', padding: '5px' }}>{expense.id}</td>
-              <td style={{ border: '1px solid black', padding: '5px' }}>{expense.description}</td>
-              <td style={{ border: '1px solid black', padding: '5px' }}>{expense.amount}</td>
-              <td style={{ border: '1px solid black', padding: '5px' }}>{expense.date}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      </div>
-    );
-  }
+  const [expenses, setExpenses] = useState([]);
+  const [description, setDescription] = useState('');
+  const [amount, setAmount] = useState('');
 
-  export default Dashboard;
+  const addExpense= () => {
+    if (description && amount) {
+      const newExpense = {
+        description: description,
+        amount: parseFloat(amount),
+      };
+      setExpenses([...expenses, newExpense]);
+      setDescription('');
+      setAmount('');
+    }
+  };
+
+  const totalExpenses = expenses.reduce((total, expense) => total + expense.amount, 0);
+
+  return (
+    <div>
+      <h2>Expense Calculator</h2>
+      <div>
+        <input
+          type="text"
+          placeholder="Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+        <input
+          type="number"
+          placeholder="Amount"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+        />
+        <button onClick={addExpense}>Add Expense</button>
+      </div>
+      <div>
+        <h3>Expenses</h3>
+        <table style={{ border: '1px solid black' }}>
+          <thead>
+            <tr>
+              <th style={{ border: '1px solid black', padding: '5px' }}>Description</th>
+              <th style={{ border: '1px solid black', padding: '5px' }}>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            {expenses.map((expense, index) => (
+              <tr key={index}>
+                <td style={{ border: '1px solid black', padding: '5px' }}>{expense.description}</td>
+                <td style={{ border: '1px solid black', padding: '5px' }}>{expense.amount}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p>Total: ${totalExpenses}</p>
+      </div>
+    </div>
+  );
+};
+
+
+export default Dashboard
