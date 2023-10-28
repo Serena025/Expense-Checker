@@ -33,10 +33,12 @@ function SignupForm() {
   };
 
   return (
-    <div>
-      <h2>Sign Up</h2>
-      <form>
-        <div>
+    <div className="signup"> 
+    <div className="signup-container">
+
+      <h2 className="signup-title">Sign Up</h2>
+     <form>
+        <div className="form-group">
           <label htmlFor="email">Email</label>
           <input
             type="text"
@@ -46,7 +48,7 @@ function SignupForm() {
           />
         </div>
 
-        <div>
+        <div className="form-group">
           <label htmlFor="username">Username</label>
           <input
             type="text"
@@ -56,7 +58,7 @@ function SignupForm() {
           />
         </div>
 
-        <div>
+        <div className="form-group">
           <label htmlFor="displayName">Display Name</label>
           <input
             type="text"
@@ -66,7 +68,7 @@ function SignupForm() {
           />
         </div>
 
-        <div>
+        <div className="form-group">
           <label htmlFor="password">Password</label>
           <input
             type="password"
@@ -76,11 +78,13 @@ function SignupForm() {
           />
         </div>
 
-        <button type="button" onClick={handleSignup}>
+        <button type="button" onClick={handleSignup} className="signup-button">
           Sign Up
         </button>
       </form>
     </div>
+
+    </div>  
   );
 }
 

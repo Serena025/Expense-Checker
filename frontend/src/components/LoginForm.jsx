@@ -40,8 +40,10 @@ function LoginForm() {
   }
 
   return (
-    <div>
-      <h1>Login</h1>
+    <div className="login">
+      <div className="login-container">
+           <div className="background-image">
+      <h1 className="signup-title">Login</h1>
       {errorMessage !== null ? <div>{errorMessage}</div> : null}
       <form onSubmit={handleLogin}>
         <div>
@@ -63,11 +65,12 @@ function LoginForm() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-
-        <button type="button" onClick={handleLogin}>
+        <button type="button" onClick={handleLogin} className="login-button">
           Login
         </button>
       </form>
+    </div>
+    </div>
     </div>
   );
 }

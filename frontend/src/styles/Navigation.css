@@ -1,8 +1,5 @@
 
 
-
-
-
 nav.nav-link{
   text-align: center;
   background-color: rgb(164, 221, 240); 
@@ -32,9 +29,6 @@ nav.nav-link{
 .userLoginItems{
   max-width: 20%;
 
-
-  
-  
 }
 
 .link-to{
@@ -56,14 +50,14 @@ nav.nav-link{
 }
 
 nav {
-  background-color: #002d5a; 
+  background-color: #9d9ba6; 
   padding: 10px; 
   font-size: 25px;
 }
 
 nav a {
   text-decoration: none; 
-  color: rgb(233, 240, 240); 
+  color: rgb(12, 12, 12); 
   margin-right: 20px; 
   cursor: pointer;
 }
@@ -72,24 +66,113 @@ nav a:hover {
   color: rgb(115, 79, 221); 
 }
 
-.userLoginItems {
+.signup-container {
+  background-color: whitesmoke;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin:auto;
+  width: 300px;
+  position: relative;
+  top: 40px; 
+  
+}
+.signup-button {
+  background-color: #d3dbe4; 
+  color: #050404;
+  padding: 10px 80px; 
+  border-radius: 1px solid black; 
+  border-radius:10px;
+  cursor: pointer; 
+
+}
+
+.signup-title {
+  font-size: 25px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.form-group {
+  margin-bottom: 10px; 
+  display: flex;
+  flex-direction: column;
+  align-items: right;
+
+}
+label {
+  display: block; 
+  margin-bottom: 1px; 
+  font-weight: bold;
+
+}
+input {
+  padding: 5px; 
+  border: 1px solid #0c0606; 
+  border-radius: 5px; 
+  width: 100%;
+
+}
+
+
+.login-container {
+  background-color: whitesmoke;
+  padding: 20px;  
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+  width: 300px;
+  position: relative;
+  top: 100px; 
+
+}
+.login-button {
+  background-color: #d3dbe4; 
+  color: #050404;
+  padding: 10px 80px; 
+  border-radius: 1px solid black; 
+  border-radius:10px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.login-title {
+  font-size: 25px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.userLoginItems{
+  margin-right: 10px;
   float: right;
   
 }
-
-.btn-login{
-  height: 9vh;
-  font-size: 0.8em;
-  font-weight: 400;
-  border-radius: 35px;
+.userLoginItems button {
+  background-color: #989494; 
+  color: #fff;
   border: none;
-  outline: 0;
-  display: inline-block;
-  padding: 10px 15px;
-  color: rgb(75, 113, 216);
-  background-color: #c8cbee;
-  text-align: center;
+  padding: 5px 5px;
+  border-radius: 10px;
   cursor: pointer;
+}
 
+.login {
+  text-align: center;
+  background: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5) ), url("https://t3.ftcdn.net/jpg/03/55/60/70/240_F_355607062_zYMS8jaz4SfoykpWz5oViRVKL32IabTP.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 1000px;;
+  
 
+  
 }

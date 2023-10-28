@@ -56,7 +56,6 @@ nav.nav-link{
     border-radius: 10%;
     margin: 2px auto;
     background-color: #002d5a; 
-    background-color: ;
     text-shadow: 2px 2px 3px rgb(238, 238, 217);
     font-size: 1.2em;
   }
@@ -86,4 +85,3 @@ nav.nav-link{
     margin-right: 20px; 
     cursor: pointer;
   }
-  
