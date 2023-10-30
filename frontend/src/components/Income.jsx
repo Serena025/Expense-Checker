@@ -5,8 +5,7 @@ import { getBackendURL } from "../common_functions";
 function Income() {
   const [incomes, setIncomes] = useState([]);
   const [error, setError] = useState(null);
-  const [updatedIncomeData, setUpdatedIncomeData] = useState({});
-  const [newIncome, setNewIncome] = useState({
+  const [newExistingIncome, setNewExistingIncome] = useState({
     date: "",
     amount: 0,
     source: "",
@@ -14,7 +13,6 @@ function Income() {
     is_recurring: false,
   });
   const [editIncome, setEditIncome] = useState(false);
-  const [editIncomeID, setEditIncomeID] = useState(-1);
 
   const url = `${getBackendURL()}/incomes`;
   useEffect(() => {
@@ -40,7 +38,7 @@ function Income() {
     fetchIncomes();
   }, [url]);
 
-  const handleUpdateIncome = async (incomeId, updatedData) => {
+  const handleUpdateIncome = async (incomeId) => {
     try {
       // Send a Get request to fetch the income
       const response = await fetch(`${url}/${incomeId}`, {
@@ -57,8 +55,7 @@ function Income() {
       const data = await response.json();
       console.log(data);
       setEditIncome(true);
-      setEditIncomeID(incomeId);
-      setNewIncome(data);
+      setNewExistingIncome(data);
     } catch (err) {
       console.error("Error updating income:", err);
     }
@@ -66,18 +63,18 @@ function Income() {
 
   const handleChangesToIncomeForm = (e) => {
     const { name, value } = e.target;
-    setNewIncome({
-      ...newIncome,
+    setNewExistingIncome({
+      ...newExistingIncome,
       [name]: value,
     });
   };
 
   const handleSubmitAddEditIncome = async (e) => {
     e.preventDefault();
-    console.log("Income = ", newIncome);
+    console.log("Income = ", newExistingIncome);
     let fixedUpIncome = {
-      ...newIncome,
-      amount: parseFloat(newIncome.amount),
+      ...newExistingIncome,
+      amount: parseFloat(newExistingIncome.amount),
     };
     console.log("Fixed up income: ", fixedUpIncome);
 
@@ -86,7 +83,7 @@ function Income() {
       let data = null;
       if (editIncome) {
         // Send a PUT request to update the income
-        response = await fetch(`${url}/${newIncome.id}`, {
+        response = await fetch(`${url}/${newExistingIncome.id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -96,7 +93,9 @@ function Income() {
         });
 
         if (!response.ok) {
-          throw new Error(`Failed to update income with ID ${newIncome.id}`);
+          throw new Error(
+            `Failed to update income with ID ${newExistingIncome.id}`
+          );
         }
 
         // Assuming that the response contains the updated income data
@@ -109,7 +108,9 @@ function Income() {
           )
         );
 
-        console.log(`Income with ID ${newIncome.id} updated successfully.`);
+        console.log(
+          `Income with ID ${newExistingIncome.id} updated successfully.`
+        );
       } else {
         // Send a POST request to the server to remove the income
         response = await fetch(`${url}`, {
@@ -140,11 +141,11 @@ function Income() {
       }
 
       setEditIncome(false);
-      setNewIncome({
+      setNewExistingIncome({
         amount: "",
         source: "",
         description: "",
-        date: newIncome.date,
+        date: newExistingIncome.date,
         is_recurring: false,
       });
     } catch (err) {
@@ -217,9 +218,7 @@ function Income() {
                 <div>
                   <button
                     className="update-button"
-                    onClick={() =>
-                      handleUpdateIncome(income.id, updatedIncomeData)
-                    }
+                    onClick={() => handleUpdateIncome(income.id)}
                   >
                     Update
                   </button>
@@ -246,7 +245,7 @@ function Income() {
             type="date"
             name="date"
             className="date"
-            value={newIncome.date}
+            value={newExistingIncome.date}
             onChange={handleChangesToIncomeForm}
           />
         </div>
@@ -257,7 +256,7 @@ function Income() {
             type="number"
             name="amount"
             className="amount"
-            value={newIncome.amount}
+            value={newExistingIncome.amount}
             maxLength={5}
             onChange={handleChangesToIncomeForm}
           />
@@ -268,7 +267,7 @@ function Income() {
             type="text"
             name="source"
             className="source"
-            value={newIncome.source}
+            value={newExistingIncome.source}
             onChange={handleChangesToIncomeForm}
           />
         </div>
@@ -278,7 +277,7 @@ function Income() {
             type="text"
             name="description"
             className="description"
-            value={newIncome.description}
+            value={newExistingIncome.description}
             onChange={handleChangesToIncomeForm}
           />
         </div>
