@@ -1,21 +1,21 @@
-#MSP3
+# MSP3
 Milestone 3
 
-#Name of App
+# Name of App
  Budget buddie
 
-#Group Members 
+# Group Members 
 Eshita Islam, Adrian Mitre, David Aguirre, Serena Ally, Marisol Valenzuela
 
-#Description of project
+# Description of project
 We decided to work on expense checker which motivated by various reasons.One of the primary reasons for coding an expense checker is to gain better control over personal or business finances. By developing a tool to track and monitor expenses, you can get a clearer picture of where your money is going, which is crucial for budgeting, saving, and making informed financial decisions.
 
 Coding an expense checker is an excellent project for learning or improving your coding skills. It offers hands-on experience in web development, mobile app development, or data analysis.
 
-#How to use the app
+# How to use the app
 When a user first accesses the app, they usually need to create an account or log in. Once they set up profile user can start adding expenses or income to the app. You can categorize expenses example food, utilies, etc. There is also pie chart you can instantly grasp which expense categories are the largest or smallest. This provides a clear summary of your spending habits. You can also keep track of the income being received. 
 
-#SETUP
+# SETUP
 First, you'll need a Postgres database to connect to. Follow instructions here to setup the database and save credentials for the next step.
 
 Next create a .env file inside of backend. It will need to contain the following environment variables (change the values for the database to match what you defined in the previous step)
@@ -36,7 +36,7 @@ Next, cd into frontend, and run npm install to install dependencies for the Reac
 
 Finally, in separate terminals, run npm start for the frontend and nodemon for the backend in each folder so that the API and React app are running at the same time.
 
-API(http://localhost:3001)
+# API(http://localhost:3001)
 
  |Method | Path | Purpose |
 | -------- | ------- | ------- |
@@ -53,7 +53,7 @@ API(http://localhost:3001)
 | DELETE| /:category_id/subcategories/:id | Delete a subcategory |
 
 
-#APP(http://localhost:3000)
+# APP(http://localhost:3000)
  |Path| Components | Purpose |
 | -------- | ------- | ------- |
 | /| Home.jsx| Home Page |
