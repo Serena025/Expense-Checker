@@ -5,21 +5,22 @@ import { getBackendURL } from "../common_functions";
 function Expenses() {
   const [expenses, setExpenses] = useState([]);
   const [error, setError] = useState(null);
+  const [editExpense, setEditExpense] = useState(false);
+  const [allcategories, setAllCategories] = useState([]);
+  const [subcategoriesForCategory, setSubcategoriesForCategory] = useState([]);
+  const [selectedCategoryId, setSelectedCategoryId] = useState(23);
+  const [selectedSubCategoryId, setSelectedSubCategoryId] = useState(88);
   const [newExistingExpense, setNewExistingExpense] = useState({
     date: "",
     amount: 0,
     source: "",
     description: "",
-    category_id: 23,
-    subcategory_id: 88,
+    category_id: selectedCategoryId,
+    subcategory_id: selectedSubCategoryId,
     recipient: "",
     payment_method: "",
     is_recurring: false,
   });
-  const [editExpense, setEditExpense] = useState(false);
-  const [allcategories, setAllCategories] = useState([]);
-  const [subcategoriesForCategory, setSubcategoriesForCategory] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState({});
 
   const url = `${getBackendURL()}/expenses`;
   useEffect(() => {
@@ -45,6 +46,61 @@ function Expenses() {
     fetchExpenses();
   }, [url]);
 
+  const fetchAllCategories = async () => {
+    try {
+      const response = await fetch(`${getBackendURL()}/categories`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Error fetching categories");
+      }
+
+      const data = await response.json();
+      console.log("Categories ", data);
+
+      setAllCategories(data);
+    } catch (err) {
+      console.error("Error fetching subcategories data:", err);
+      setError(err.message);
+    }
+  };
+
+  const fetchAllSubCategories = async (selectedCategoryId) => {
+    try {
+      const response = await fetch(
+        `${getBackendURL()}/categories/${selectedCategoryId}/subcategories`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Error fetching categories");
+      }
+
+      const data = await response.json();
+      console.log("Sub Categories ", data);
+
+      setSubcategoriesForCategory(data);
+    } catch (err) {
+      console.error("Error fetching categories data:", err);
+      setError(err.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllCategories();
+  }, []);
+
+  useEffect(() => {
+    fetchAllSubCategories(selectedCategoryId);
+  }, [selectedCategoryId]);
+
   const handleUpdateExpense = async (expenseId) => {
     try {
       // Send a Get request to fetch the expense
@@ -62,6 +118,8 @@ function Expenses() {
       const data = await response.json();
       console.log("ESH - Existing expense: ", data);
       setEditExpense(true);
+      setSelectedCategoryId(data.category_id);
+      setSelectedSubCategoryId(data.subcategory_id);
       setNewExistingExpense(data);
     } catch (err) {
       console.error("Error updating expense:", err);
@@ -69,7 +127,36 @@ function Expenses() {
   };
 
   const handleChangesToExpenseForm = (e) => {
-    const { name, value } = e.target;
+    let { name, value } = e.target;
+    console.log("Name, value", name, value);
+
+    if (name === "category_id") {
+      console.log(allcategories);
+      let id = parseInt(value);
+      let x = allcategories.filter((c) => {
+        return c.id === id;
+      });
+      if (x != null && x.length > 0) {
+        console.log("x:", x);
+        value = id;
+        setSelectedCategoryId(id);
+        console.log(value);
+      }
+    }
+    if (name === "subcategory_id") {
+      console.log(subcategoriesForCategory);
+      let id = parseInt(value);
+      let x = subcategoriesForCategory.filter((s) => {
+        return s.id === id;
+      });
+      if (x != null && x.length > 0) {
+        console.log("x:", x);
+        value = id;
+        setSelectedSubCategoryId(id);
+        console.log(value);
+      }
+    }
+
     setNewExistingExpense({
       ...newExistingExpense,
       [name]: value,
@@ -150,9 +237,11 @@ function Expenses() {
       setEditExpense(false);
       setNewExistingExpense({
         amount: "",
-        source: "",
+        recipient: "",
         description: "",
         date: newExistingExpense.date,
+        category_id: 23,
+        subcategory_id: 88,
         is_recurring: false,
       });
     } catch (err) {
@@ -286,6 +375,36 @@ function Expenses() {
             onChange={handleChangesToExpenseForm}
           />
         </div>
+
+        <div>
+          <label for="selectedCategory">Category:</label>
+          <select
+            value={selectedCategoryId}
+            onChange={handleChangesToExpenseForm}
+            name="category_id"
+          >
+            {allcategories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label for="selectedSubCategory">Sub Category:</label>
+          <select
+            value={selectedSubCategoryId}
+            onChange={handleChangesToExpenseForm}
+            name="subcategory_id"
+          >
+            {subcategoriesForCategory.map((subcategory) => (
+              <option key={subcategory.id} value={subcategory.id}>
+                {subcategory.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
         <hr />
         <button onClick={handleSubmitAddEditExpense}>Submit</button>
       </div>
