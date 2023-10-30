@@ -1,5 +1,3 @@
-
-
 nav.nav-link{
   text-align: center;
   background-color: rgb(164, 221, 240); 
@@ -12,11 +10,9 @@ nav.nav-link{
   justify-content:space-between;
   flex-wrap: wrap;
   max-width: 100%;
-
 }
 
 .container{
-  
   display: flex;
   flex-direction:row ;
   justify-content:flex-start ;
@@ -27,7 +23,7 @@ nav.nav-link{
 }
 
 .userLoginItems{
-  max-width: 20%;
+  max-width: 30%;
 
 }
 
@@ -36,7 +32,6 @@ nav.nav-link{
   height: 10vh;
   text-align: center;
   border-radius: 10%;
-
 }
 
 .link-to a{
@@ -79,7 +74,6 @@ nav a:hover {
   width: 300px;
   position: relative;
   top: 40px; 
-  
 }
 .signup-button {
   background-color: #d3dbe4; 
@@ -88,7 +82,6 @@ nav a:hover {
   border-radius: 1px solid black; 
   border-radius:10px;
   cursor: pointer; 
-
 }
 
 .signup-title {
@@ -153,17 +146,24 @@ input {
 }
 
 .userLoginItems{
-  margin-right: 10px;
   float: right;
-  
+  font-size: 0.9em;  
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.username {
+  font-style: italic;
 }
 .userLoginItems button {
-  background-color: #989494; 
-  color: #fff;
+  background-color: lightsalmon; 
+  color: white;
   border: none;
-  padding: 5px 5px;
   border-radius: 10px;
-  cursor: pointer;
+  cursor: pointer;  
+  margin-left: 10px;
+  margin-bottom: 10px;
+  font-size: 0.9em;  
 }
 
 .login {
@@ -171,8 +171,5 @@ input {
   background: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5) ), url("https://t3.ftcdn.net/jpg/03/55/60/70/240_F_355607062_zYMS8jaz4SfoykpWz5oViRVKL32IabTP.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  height: 1000px;;
-  
-
-  
+  height: 1000px;  
 }

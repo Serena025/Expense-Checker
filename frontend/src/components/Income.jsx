@@ -6,7 +6,13 @@ function Income() {
   const [incomes, setIncomes] = useState([]);
   const [error, setError] = useState(null);
   const [updatedIncomeData] = useState({});
-  const [newIncome, setNewIncome] = useState({ date: "", amount: 0, source: "", description: "" });
+  const [newIncome, setNewIncome] = useState({
+    date: "",
+    amount: 0,
+    source: "",
+    description: "",
+    is_recurring: false,
+  });
 
   const url = `${getBackendURL()}/incomes`;
   useEffect(() => {
@@ -18,7 +24,6 @@ function Income() {
           },
         });
 
-        
         if (!response.ok) {
           throw new Error("Error fetching incomes");
         }
@@ -63,20 +68,68 @@ function Income() {
     } catch (err) {
       console.error("Error updating income:", err);
     }
-  }
+  };
 
-const handleNewIncomeChange = (e) => {
-  const { name, value } = e.target;
-  setNewIncome({
-    ...newIncome,
-    [name]: value,
-  });
-};
+  const handleChangesToIncomeForm = (e) => {
+    const { name, value } = e.target;
+    setNewIncome({
+      ...newIncome,
+      [name]: value,
+    });
+  };
 
-const addNewIncome = async (e) => {
-  e.preventDefault();
-}
-  const handleDeleteIncome = async(incomeId) => {
+  const handleAddNewIncome = async (e) => {
+    e.preventDefault();
+    console.log("Income = ", newIncome);
+    let fixedUpIncome = {
+      ...newIncome,
+      amount: parseFloat(newIncome.amount),
+    };
+    console.log("Fixed up income: ", fixedUpIncome);
+
+    try {
+      // Send a POST request to the server to remove the income
+      const response = await fetch(`${url}`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(fixedUpIncome),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to add new income`);
+      }
+
+      const data = await response.json();
+      if (response.status === 200) {
+        console.log(data);
+      } else {
+        setError(data.message);
+      }
+
+      // Update your local state to reflect the deletion
+      const newIncomesCopy = [...incomes];
+      newIncomesCopy.push(fixedUpIncome);
+      setIncomes(newIncomesCopy);
+
+      setNewIncome({
+        amount: "",
+        source: "",
+        description: "",
+        date: newIncome.date,
+        is_recurring: false,
+      });
+
+      console.log(`Income with ID ${data.id} added successfully.`);
+    } catch (err) {
+      console.error("Error addding income:", err);
+    }
+
+    console.log("Got here!");
+  };
+  const handleDeleteIncome = async (incomeId) => {
     try {
       // Send a DELETE request to the server to remove the income
       const response = await fetch(`${url}/${incomeId}`, {
@@ -91,8 +144,9 @@ const addNewIncome = async (e) => {
       }
 
       // Update your local state to reflect the deletion
-
-      setIncomes((prevIncomes) => prevIncomes.filter((income) => income.id !== incomeId));
+      setIncomes((prevIncomes) =>
+        prevIncomes.filter((income) => income.id !== incomeId)
+      );
 
       console.log(`Income with ID ${incomeId} deleted successfully.`);
     } catch (err) {
@@ -102,7 +156,7 @@ const addNewIncome = async (e) => {
 
   return (
     <div className="incomes-1">
-      {error && <p>Error loading expenses: {error}</p>}
+      {error && <p>Error loading incomes: {error}</p>}
       <table style={{ border: "1px solid black" }}>
         <thead>
           <tr striped>
@@ -135,59 +189,78 @@ const addNewIncome = async (e) => {
               </td>
               <td style={{ border: "1px solid black", padding: "5px" }}>
                 <div>
-              <button onClick={() => handleUpdateIncome(income.id, updatedIncomeData)}>Update</button>
-      <button onClick={() => handleDeleteIncome(income.id)}>Delete</button>
-      </div>
-    </td>
-    
+                  <button
+                    className="update-button"
+                    onClick={() =>
+                      handleUpdateIncome(income.id, updatedIncomeData)
+                    }
+                  >
+                    Update
+                  </button>
+                  <button
+                    className="delete-button"
+                    onClick={() => handleDeleteIncome(income.id)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </td>
             </tr>
           ))}
-          
         </tbody>
       </table>
 
-    <div>
-    <h3>Add New Income</h3>
-    <div>
-      <label>Date:</label>
-      <input
-        type="date"
-        name="date"
-        value={newIncome.date}
-        onChange={handleNewIncomeChange}
-        />
+      <div className="add-income-group">
+        <hr />
+        <h3>Add New Income</h3>
+        <hr />
+        <div>
+          <label>Date:</label>
+          <input
+            type="date"
+            name="date"
+            className="date"
+            value={newIncome.date}
+            onChange={handleChangesToIncomeForm}
+          />
+        </div>
+        <div>
+          <label>Amount:</label>
+          <span className="dollarSign">$ </span>
+          <input
+            type="number"
+            name="amount"
+            className="amount"
+            value={newIncome.amount}
+            maxLength={5}
+            onChange={handleChangesToIncomeForm}
+          />
+        </div>
+        <div>
+          <label>Source:</label>
+          <input
+            type="text"
+            name="source"
+            className="source"
+            value={newIncome.source}
+            onChange={handleChangesToIncomeForm}
+          />
+        </div>
+        <div>
+          <label>Description:</label>
+          <input
+            type="text"
+            name="description"
+            className="description"
+            value={newIncome.description}
+            onChange={handleChangesToIncomeForm}
+          />
+        </div>
+        <hr />
+        <button onClick={handleAddNewIncome}>Submit</button>
       </div>
-      <div>
-        <label>Amount:</label>
-        <input
-          type="number"
-          name="amount"
-          value={newIncome.amount}
-          onChange={handleNewIncomeChange}
-        />
-      </div>
-      <div>
-        <label>Source:</label>
-        <input
-          type="text"
-          name="source"
-          value={newIncome.source}
-          onChange={handleNewIncomeChange}
-        />
-      </div>
-      <div>
-        <label>Description:</label>
-        <input
-          type="text"
-          name="description"
-          value={newIncome.description}
-          onChange={handleNewIncomeChange}
-        />
-      </div>
-      <button onClick={addNewIncome}>Add Income</button>
     </div>
-  </div>
-);
+  );
 }
 
 export default Income;
