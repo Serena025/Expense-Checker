@@ -10,6 +10,9 @@ import Income from "./components/Income";
 import Expenses from "./components/Expenses";
 import { createContext, useState, useEffect } from "react";
 import { getBackendURL } from "./common_functions";
+import AddNewExpenses from "./components/AddNewExpenses";
+
+
 
 export const UserContext = createContext();
 

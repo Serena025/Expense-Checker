@@ -6,30 +6,6 @@ function Expenses() {
   const [expenses, setExpenses] = useState([]);
   const [error, setError] = useState(null);
 
-  const url = `${getBackendURL()}/expenses`;
-  useEffect(() => {
-    const fetchExpenses = async () => {
-      try {
-        const response = await fetch(url, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error("Error fetching expenses");
-        }
-
-        const data = await response.json();
-        setExpenses(data);
-      } catch (err) {
-        console.error("Error fetching expenses data:", err);
-        setError(err.message);
-      }
-    };
-    fetchExpenses();
-  }, []);
-
   return (
     <div className="expenses-1">
       {error && <p>Error loading expenses: {error}</p>}
