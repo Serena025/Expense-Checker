@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { getBackendURL } from "../common_functions";
 
 
-
 function AddNewExpenses() {
   const [expenses, setExpenses] = useState([]);
   const [error, setError] = useState(null);
