@@ -13,10 +13,19 @@
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
+  z-index: 1;
 }
 .homepage{
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  color: rgb(75, 146, 216)
 }
+
+.homepage p {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+
 
 .signup {
   background:url("https://images.pexels.com/photos/6328858/pexels-photo-6328858.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
