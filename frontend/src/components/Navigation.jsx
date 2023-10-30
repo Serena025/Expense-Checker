@@ -17,13 +17,17 @@ function Navigation() {
   const navigationForLoggedOutUser = () => {
     return (
       <nav>
-        <img src="https://images.freeimages.com/fic/images/icons/1681/siena/256/currency_dollar.png" alt="" style={{
-    width: '40px',  
-    height: 'auto',  
-  }}
-/>
+        <img
+          src="https://images.freeimages.com/fic/images/icons/1681/siena/256/currency_dollar.png"
+          alt=""
+          style={{
+            width: "40px",
+            height: "auto",
+          }}
+        />
         <Link to="/">Home</Link>
         <Link to="/about">About</Link>
+        <Link to="/test">Test</Link>
 
         <div className="userLoginItems">
           <Link to="/login">Login</Link>
@@ -35,26 +39,27 @@ function Navigation() {
 
   const navigationForLoggedInUser = () => {
     return (
-    
       <nav className="nav-link">
         <div className="container">
-        <div className="link-to">
-          <Link to="/dashboard">Dashboard</Link>
-        </div>
-        <div className="link-to">
-          <Link to="/expenses">Expenses</Link>
-        </div>
-        <div className="link-to">
-          <Link to="/income">Income</Link>
-        </div>
+          <div className="link-to">
+            <Link to="/dashboard">Dashboard</Link>
+          </div>
+          <div className="link-to">
+            <Link to="/expenses">Expenses</Link>
+          </div>
+          <div className="link-to">
+            <Link to="/income">Income</Link>
+          </div>
+          <div className="link-to">
+            <Link to="/test">Test</Link>
+          </div>
         </div>
 
-       
-
-    
         <div className="userLoginItems">
           {user.display_name}
-          <button onClick={logout} className="btn-login">Logout</button>
+          <button onClick={logout} className="btn-login">
+            Logout
+          </button>
         </div>
       </nav>
     );

@@ -8,7 +8,23 @@ function Dashboard() {
   const [categories, setCategories] = useState({});
   const [error, setError] = useState(null);
   const [chartData, setChartData] = useState(null);
-  const [totalAmountSpent, setTotalAmountSpent] = useState(0);
+  const [totalExpenses, setTotalAmountSpent] = useState(0);
+  const [chartType, setChartType] = useState("PieChart");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [searchFieldsChanged, setSearchFieldsChanged] = useState(true);
+
+  const handleChartTypeChange = (e) => {
+    const newValue = e.target.value;
+    setChartType(newValue);
+    console.log(`New chart type value: ${newValue}`);
+  };
+
+  const handleCategoryChange = (e) => {
+    const newValue = e.target.value;
+    setSelectedCategory(newValue);
+    setSearchFieldsChanged(true);
+    console.log(`New category value: ${newValue}`);
+  };
 
   const fetchCategories = async () => {
     try {
@@ -28,9 +44,7 @@ function Dashboard() {
       for (let index in data) {
         let category = data[index];
         newCategories[category.id] = category;
-        console.log(index);
       }
-      console.log(newCategories);
 
       setCategories(newCategories);
     } catch (err) {
@@ -63,8 +77,9 @@ function Dashboard() {
     try {
       fetchCategories();
       fetchExpensesData();
+      setSearchFieldsChanged(false);
     } catch (e) {}
-  }, []);
+  }, [searchFieldsChanged]);
 
   useEffect(() => {
     try {
@@ -89,21 +104,49 @@ function Dashboard() {
           data.push([label, amountSpent]);
         }
         setChartData(data);
+        console.log("----------");
       }
+      searchFieldsChanged = false;
     } catch (e) {}
-  }, [expenses, categories]);
+  }, [searchFieldsChanged]);
 
   return (
     <div>
       {error && <p>Error loading expenses: {error}</p>}
+      <div class="parameters">
+        <label for="chartType">Choose a chart type:</label>
+        <select
+          value={chartType}
+          onChange={handleChartTypeChange}
+          name="chartType"
+          id="chartType"
+        >
+          <option value="Bar">Bar</option>
+          <option value="PieChart">Pie Chart</option>
+        </select>
+
+        <label for="selectedCategory">Choose a category:</label>
+        <select
+          value={selectedCategory}
+          onChange={handleCategoryChange}
+          name="selectedCategory"
+          id="selectedCategory"
+        >
+          <option value="">All</option>
+          <option value="14">Housing</option>
+          <option value="15">Food</option>
+        </select>
+      </div>
+      <hr />
+      <h5>Total Expenses: ${totalExpenses.toFixed(2)} </h5>
+      <hr />
       {chartData && (
         <div
           style={{ width: "600px", height: "450px", margin: "0", padding: "0" }}
         >
-          <h5>Total Expenses: ${totalAmountSpent.toFixed(2)} </h5>
           <h5>Expense Breakdown</h5>
           <Chart
-            chartType="PieChart"
+            chartType={chartType}
             width="100%"
             height="100%"
             data={chartData}
@@ -115,6 +158,7 @@ function Dashboard() {
           />
         </div>
       )}
+      <hr />
     </div>
   );
 }
