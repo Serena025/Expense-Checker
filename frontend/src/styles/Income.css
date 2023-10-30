@@ -1,15 +1,112 @@
 .incomes-1 {
     text-align: center;
-    
-    background: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5) ), url("https://media.istockphoto.com/id/1462932996/photo/cost-and-quality-control-business-strategy-and-project-management-concept-businessman-working.jpg?s=2048x2048&w=is&k=20&c=9d0Yv2vOMrRWxJD-YDen2z9HiQz7zSSeNUE0HcRhq9U=");
+    background: linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3) ), url("https://media.istockphoto.com/id/1462932996/photo/cost-and-quality-control-business-strategy-and-project-management-concept-businessman-working.jpg?s=2048x2048&w=is&k=20&c=9d0Yv2vOMrRWxJD-YDen2z9HiQz7zSSeNUE0HcRhq9U=");
     background-repeat: no-repeat;
     background-size: cover;
-    height:150vh;
-    
+    height:150vh;   
+    padding: 10px
   }
 
   .incomes-1 h2{
-    font-size: 3em;
-    color: rgb(104, 86, 65);
+    font-size: 2em;
+    color: rgb(135, 112, 85);
     font-weight: 600;
   }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+ 
+  table th {
+    background-color: #333;
+    color: #fff;
+    font-weight: bold;
+    text-align: left;
+    padding: 10px;
+  }
+  
+
+  table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  
+  /* Style for Update and Delete buttons */
+  button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Style for the "Add New Income" section */
+  h3 {
+    font-size: 18px;
+    margin-top: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  input {
+    padding: 5px;
+    border: 1px solid #080808;
+    border-radius: 4px;
+    margin-top: 5px;
+    width: 200px;
+    text-align: center;
+  }
+
+  .add-income-group {
+    border: 2px solid black;
+    padding: 0 0 10px 0;
+    background-color: beige;
+    width: 400px;
+    margin-top:20px;
+  }
+
+  .dollarSign {
+    font-size: 1.4em;
+  }
+
+  .add-income-group .date {
+    width: 120px;
+  }
+
+  .add-income-group .amount {
+    width: 100px;
+    text-align: right;
+  }
+
+  .add-income-group .description {
+    width: 300px;
+  }
+
+  .add-income-group .source {
+    width: 240px;
+  }
+
+  .update-button {
+    background-color: yellow;
+    color: black;
+    border: 1px solid black;
+  }
+
+  .delete-button {
+    background-color: red;
+    color: white;
+    border: 1px solid black;
+  }
+
+ 
+
