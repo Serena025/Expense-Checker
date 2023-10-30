@@ -6,134 +6,164 @@ const { Income } = db;
 
 // Gets the list of all incomes for a user
 incomeRouter.get("/", async (req, res) => {
-  if (req.currentUser) {
-    let incomes = await Income.findAll({
-      where: { user_id: req.currentUser.user_id },
-    });
-
-    if (!incomes) {
-      res.status(404).json({
-        message: `Income could not be retrieved. Reason: Unknown`,
+  try {
+    if (req.currentUser) {
+      let incomes = await Income.findAll({
+        where: { user_id: req.currentUser.user_id },
       });
+
+      if (!incomes) {
+        res.status(404).json({
+          message: `Income could not be retrieved. Reason: Unknown`,
+        });
+      } else {
+        res.status(200).json(incomes);
+      }
     } else {
-      res.status(200).json(incomes);
+      res.status(404).json({
+        message: `Income could not be retrieved. Reason: User not logged in`,
+      });
     }
-  } else {
-    res.status(404).json({
-      message: `Income could not be retrieved. Reason: User not logged in`,
+  } catch (e) {
+    res.status(500).json({
+      message: `Income could not be retrieved. Reason: Server error`,
     });
   }
 });
 
 // Gets an individual income for a user
 incomeRouter.get("/:id", async (req, res) => {
-  if (req.currentUser) {
-    let incomeID = Number(req.params.id);
-    if (isNaN(incomeID)) {
-      res.status(404).json({
-        message: `Income could not be retrieved. Reason: Invalid id ${incomeID}`,
-      });
-    } else {
-      const income = await Income.findOne({
-        where: { id: incomeID },
-      });
-
-      if (!income) {
+  try {
+    if (req.currentUser) {
+      let incomeID = Number(req.params.id);
+      if (isNaN(incomeID)) {
         res.status(404).json({
-          message: `Income could not be retrieved. Reason: Database error`,
+          message: `Income could not be retrieved. Reason: Invalid id ${incomeID}`,
         });
       } else {
-        res.json(income);
+        const income = await Income.findOne({
+          where: { id: incomeID },
+        });
+
+        if (!income) {
+          res.status(404).json({
+            message: `Income could not be retrieved. Reason: Database error`,
+          });
+        } else {
+          res.json(income);
+        }
       }
+    } else {
+      res.status(404).json({
+        message: `Income could not be retrieved. Reason: User not logged in`,
+      });
     }
-  } else {
-    res.status(404).json({
-      message: `Income could not be retrieved. Reason: User not logged in`,
+  } catch (e) {
+    res.status(500).json({
+      message: `Individual Income could not be retrieved. Reason: Server error`,
     });
   }
 });
 
 // Post an income for a user
 incomeRouter.post("/", async (req, res) => {
-  if (req.currentUser) {
-    let new_income = await Income.create({
-      user_id: req.currentUser.user_id,
-      ...req.body,
-    });
-
-    if (!new_income) {
-      res.status(404).json({
-        message: `Income could not be posted. Reason: Database error`,
+  try {
+    if (req.currentUser) {
+      let new_income = await Income.create({
+        user_id: req.currentUser.user_id,
+        ...req.body,
       });
+
+      if (!new_income) {
+        res.status(404).json({
+          message: `Income could not be posted. Reason: Database error`,
+        });
+      } else {
+        res.status(200).json(new_income);
+      }
     } else {
-      res.status(200).json(new_income);
+      res.status(404).json({
+        message: `Income could not be posted. Reason: User not logged in`,
+      });
     }
-  } else {
-    res.status(404).json({
-      message: `Income could not be posted. Reason: User not logged in`,
+  } catch (e) {
+    res.status(500).json({
+      message: `Income could not be posted. Reason: Server error`,
     });
   }
 });
 
 // Update an existing income
 incomeRouter.put("/:id", async (req, res) => {
-  if (req.currentUser) {
-    console.log(req.body);
-    let incomeID = Number(req.params.id);
-    if (isNaN(incomeID)) {
-      res.status(404).json({
-        message: `Income could not be updated. Reason: Invalid id ${incomeID}`,
-      });
-    } else {
-      const income = await Income.findOne({
-        where: { id: incomeID },
-      });
-
-      if (!income) {
+  try {
+    if (req.currentUser) {
+      console.log(req.body);
+      let incomeID = Number(req.params.id);
+      if (isNaN(incomeID)) {
         res.status(404).json({
-          message: `Income could not be updated. Reason: Could not find any income with given id`,
+          message: `Income could not be updated. Reason: Invalid id ${incomeID}`,
         });
       } else {
-        Object.assign(income, req.body);
-        await income.save();
-        console.log("Updated income with id", incomeID);
-        res.json(income);
+        const income = await Income.findOne({
+          where: { id: incomeID },
+        });
+
+        if (!income) {
+          res.status(404).json({
+            message: `Income could not be updated. Reason: Could not find any income with given id`,
+          });
+        } else {
+          Object.assign(income, req.body);
+          await income.save();
+          console.log("Updated income with id", incomeID);
+          res.json(income);
+        }
       }
+    } else {
+      res.status(404).json({
+        message: `Income could not be updated. Reason: User not logged in`,
+      });
     }
-  } else {
-    res.status(404).json({
-      message: `Income could not be updated. Reason: User not logged in`,
+  } catch (e) {
+    res.status(500).json({
+      message: `Income could not be updated. Reason: Server error`,
     });
   }
 });
 
 // Delete an income from the table
 incomeRouter.delete("/:id", async (req, res) => {
-  if (req.currentUser) {
-    console.log(req.body);
-    let incomeID = Number(req.params.id);
-    if (isNaN(incomeID)) {
-      res.status(404).json({
-        message: `Income could not be deleted. Reason: Invalid id ${incomeID}`,
-      });
-    } else {
-      const income = await Income.findOne({
-        where: { id: incomeID },
-      });
-
-      if (!income) {
+  try {
+    if (req.currentUser) {
+      console.log(req.body);
+      let incomeID = Number(req.params.id);
+      if (isNaN(incomeID)) {
         res.status(404).json({
-          message: `Income could not be deleted. Reason: Could not find any income with given id`,
+          message: `Income could not be deleted. Reason: Invalid id ${incomeID}`,
         });
       } else {
-        await income.destroy();
-        console.log("Deleted income with id", incomeID);
-        res.json(income);
+        const income = await Income.findOne({
+          where: { id: incomeID },
+        });
+
+        if (!income) {
+          res.status(404).json({
+            message: `Income could not be deleted. Reason: Could not find any income with given id`,
+          });
+        } else {
+          await income.destroy();
+          console.log("Deleted income with id", incomeID);
+          res.json(income);
+        }
       }
+    } else {
+      res.status(404).json({
+        message: `Income could not be deleted. Reason: User not logged in`,
+      });
     }
-  } else {
-    res.status(404).json({
-      message: `Income could not be updated. Reason: User not logged in`,
+  } catch (e) {
+    res.status(500).json({
+      message: `Income could not be deleted. Reason: Server error`,
     });
   }
 });

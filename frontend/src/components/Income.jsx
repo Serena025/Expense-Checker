@@ -105,24 +105,24 @@ function Income() {
       const data = await response.json();
       if (response.status === 200) {
         console.log(data);
+
+        // Update your local state to reflect the addition
+        const newIncomesCopy = [...incomes];
+        newIncomesCopy.push(data);
+        setIncomes(newIncomesCopy);
+
+        setNewIncome({
+          amount: "",
+          source: "",
+          description: "",
+          date: newIncome.date,
+          is_recurring: false,
+        });
+
+        console.log(`Income with ID ${data.id} added successfully.`);
       } else {
         setError(data.message);
       }
-
-      // Update your local state to reflect the deletion
-      const newIncomesCopy = [...incomes];
-      newIncomesCopy.push(fixedUpIncome);
-      setIncomes(newIncomesCopy);
-
-      setNewIncome({
-        amount: "",
-        source: "",
-        description: "",
-        date: newIncome.date,
-        is_recurring: false,
-      });
-
-      console.log(`Income with ID ${data.id} added successfully.`);
     } catch (err) {
       console.error("Error addding income:", err);
     }
@@ -131,6 +131,7 @@ function Income() {
   };
   const handleDeleteIncome = async (incomeId) => {
     try {
+      console.log(incomeId);
       // Send a DELETE request to the server to remove the income
       const response = await fetch(`${url}/${incomeId}`, {
         method: "DELETE",
