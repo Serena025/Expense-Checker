@@ -40,17 +40,28 @@ Finally, in separate terminals, run npm start for the frontend and nodemon for t
 
  |Method | Path | Purpose |
 | -------- | ------- | ------- |
-| GET | / | Gets all the categories/list all expenses/List of income|
-| GET | :Id | Gets the list of all expenses/income for a user
-| GET | /:Id | Gets an individual expense for a user/gets individual category |
-| POST| / | Post an expense/income for a user/Adds a new category |
-| PUT | /:Id | Update an existing expense/category/income|
-| DELETE | /:Id | Delete an expense from the table/Delete category/Delete income |
+| GET | / | Gets all the categories|
+| GET | :Id | Gets the list of all categories|
+| GET | /:Id | gets individual category |
+| POST| / | dds a new category |
+| PUT | /:Id | category/income|
+| DELETE | /:Id | Delete category|
 | GET| /:category_id/subcategories| Gets all the subcategories for a given category |
 | GET | /:category_id/subcategories/:id | Gets an individual subcategory by id |
 | PUT | /:category_id/subcategories/:id | Update an individual subcategory by id |
 | POST | /:category_id/subcategories |  Add a new subcategory|
 | DELETE| /:category_id/subcategories/:id | Delete a subcategory |
+| GET| /expenses| gets all expenses |
+| GET | /expenses/:id| gets individual expense|
+| POST| /expenses | adds new expenses |
+| PUT | /expenses/:id | updates and existing expense|
+| DELETE| /expenses/:id | Delete an individual expense |@
+ GET| /incomes| list all income |
+| GET | /income/:id| income for a user|
+| POST| /income | adds new income |
+| PUT | /income/:id | updates and existing income|
+| DELETE| /income/:id | Delete an individual income |
+
 
 
 # APP(http://localhost:3000)
