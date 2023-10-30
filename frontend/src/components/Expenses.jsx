@@ -18,7 +18,7 @@ function Expenses() {
     category_id: selectedCategoryId,
     subcategory_id: selectedSubCategoryId,
     recipient: "",
-    payment_method: "",
+    payment_method: "Others",
     is_recurring: false,
   });
 
@@ -128,7 +128,6 @@ function Expenses() {
 
   const handleChangesToExpenseForm = (e) => {
     let { name, value } = e.target;
-    console.log("Name, value", name, value);
 
     if (name === "category_id") {
       console.log(allcategories);
@@ -169,6 +168,7 @@ function Expenses() {
     let fixedUpExpense = {
       ...newExistingExpense,
       amount: parseFloat(newExistingExpense.amount),
+      payment_method: "Others",
     };
     console.log("ESH 2 - Fixed up expense: ", fixedUpExpense);
 
