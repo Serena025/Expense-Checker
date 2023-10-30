@@ -5,14 +5,14 @@ import { getBackendURL } from "../common_functions";
 function Income() {
   const [incomes, setIncomes] = useState([]);
   const [error, setError] = useState(null);
-  const [updatedIncomeData] = useState({});
-  const [newIncome, setNewIncome] = useState({
+  const [newExistingIncome, setNewExistingIncome] = useState({
     date: "",
     amount: 0,
     source: "",
     description: "",
     is_recurring: false,
   });
+  const [editIncome, setEditIncome] = useState(false);
 
   const url = `${getBackendURL()}/incomes`;
   useEffect(() => {
@@ -38,33 +38,24 @@ function Income() {
     fetchIncomes();
   }, [url]);
 
-  const handleUpdateIncome = async (incomeId, updatedData) => {
+  const handleUpdateIncome = async (incomeId) => {
     try {
-      // Send a PUT request to update the income
+      // Send a Get request to fetch the income
       const response = await fetch(`${url}/${incomeId}`, {
-        method: "PUT",
+        method: "GET",
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-        body: JSON.stringify(updatedData), // Use updatedData here
       });
 
       if (!response.ok) {
-        throw new Error(`Failed to update income with ID ${incomeId}`);
+        throw new Error(`Failed to fetch income with ID ${incomeId}`);
       }
 
-      // Assuming that the response contains the updated income data
-      const updatedIncome = await response.json();
-
-      // Update your local state with the updated income data
-      setIncomes((prevIncomes) =>
-        prevIncomes.map((income) =>
-          income.id === updatedIncome.id ? updatedIncome : income
-        )
-      );
-
-      console.log(`Income with ID ${incomeId} updated successfully.`);
+      const data = await response.json();
+      console.log(data);
+      setEditIncome(true);
+      setNewExistingIncome(data);
     } catch (err) {
       console.error("Error updating income:", err);
     }
@@ -72,57 +63,91 @@ function Income() {
 
   const handleChangesToIncomeForm = (e) => {
     const { name, value } = e.target;
-    setNewIncome({
-      ...newIncome,
+    setNewExistingIncome({
+      ...newExistingIncome,
       [name]: value,
     });
   };
 
-  const handleAddNewIncome = async (e) => {
+  const handleSubmitAddEditIncome = async (e) => {
     e.preventDefault();
-    console.log("Income = ", newIncome);
+    console.log("Income = ", newExistingIncome);
     let fixedUpIncome = {
-      ...newIncome,
-      amount: parseFloat(newIncome.amount),
+      ...newExistingIncome,
+      amount: parseFloat(newExistingIncome.amount),
     };
     console.log("Fixed up income: ", fixedUpIncome);
 
     try {
-      // Send a POST request to the server to remove the income
-      const response = await fetch(`${url}`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(fixedUpIncome),
-      });
-
-      if (!response.ok) {
-        throw new Error(`Failed to add new income`);
-      }
-
-      const data = await response.json();
-      if (response.status === 200) {
-        console.log(data);
-
-        // Update your local state to reflect the addition
-        const newIncomesCopy = [...incomes];
-        newIncomesCopy.push(data);
-        setIncomes(newIncomesCopy);
-
-        setNewIncome({
-          amount: "",
-          source: "",
-          description: "",
-          date: newIncome.date,
-          is_recurring: false,
+      let response = null;
+      let data = null;
+      if (editIncome) {
+        // Send a PUT request to update the income
+        response = await fetch(`${url}/${newExistingIncome.id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify(fixedUpIncome),
         });
 
-        console.log(`Income with ID ${data.id} added successfully.`);
+        if (!response.ok) {
+          throw new Error(
+            `Failed to update income with ID ${newExistingIncome.id}`
+          );
+        }
+
+        // Assuming that the response contains the updated income data
+        const updatedIncome = await response.json();
+
+        // Update your local state with the updated income data
+        setIncomes((prevIncomes) =>
+          prevIncomes.map((income) =>
+            income.id === updatedIncome.id ? updatedIncome : income
+          )
+        );
+
+        console.log(
+          `Income with ID ${newExistingIncome.id} updated successfully.`
+        );
       } else {
-        setError(data.message);
+        // Send a POST request to the server to remove the income
+        response = await fetch(`${url}`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(fixedUpIncome),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Failed to add new income`);
+        }
+
+        data = await response.json();
+        if (response.status === 200) {
+          console.log(data);
+
+          // Update your local state to reflect the addition
+          const newIncomesCopy = [...incomes];
+          newIncomesCopy.push(data);
+          setIncomes(newIncomesCopy);
+          console.log(`Income with ID ${data.id} added successfully.`);
+        } else {
+          setError(data.message);
+        }
       }
+
+      setEditIncome(false);
+      setNewExistingIncome({
+        amount: "",
+        source: "",
+        description: "",
+        date: newExistingIncome.date,
+        is_recurring: false,
+      });
     } catch (err) {
       console.error("Error addding income:", err);
     }
@@ -157,6 +182,7 @@ function Income() {
 
   return (
     <div className="incomes-1">
+      <h2>Income</h2>
       {error && <p>Error loading incomes: {error}</p>}
       <table style={{ border: "1px solid black" }}>
         <thead>
@@ -192,9 +218,7 @@ function Income() {
                 <div>
                   <button
                     className="update-button"
-                    onClick={() =>
-                      handleUpdateIncome(income.id, updatedIncomeData)
-                    }
+                    onClick={() => handleUpdateIncome(income.id)}
                   >
                     Update
                   </button>
@@ -213,7 +237,7 @@ function Income() {
 
       <div className="add-income-group">
         <hr />
-        <h3>Add New Income</h3>
+        <h3>{editIncome ? "Edit Existing Income" : "Add New Income"}</h3>
         <hr />
         <div>
           <label>Date:</label>
@@ -221,7 +245,7 @@ function Income() {
             type="date"
             name="date"
             className="date"
-            value={newIncome.date}
+            value={newExistingIncome.date}
             onChange={handleChangesToIncomeForm}
           />
         </div>
@@ -232,7 +256,7 @@ function Income() {
             type="number"
             name="amount"
             className="amount"
-            value={newIncome.amount}
+            value={newExistingIncome.amount}
             maxLength={5}
             onChange={handleChangesToIncomeForm}
           />
@@ -243,7 +267,7 @@ function Income() {
             type="text"
             name="source"
             className="source"
-            value={newIncome.source}
+            value={newExistingIncome.source}
             onChange={handleChangesToIncomeForm}
           />
         </div>
@@ -253,12 +277,12 @@ function Income() {
             type="text"
             name="description"
             className="description"
-            value={newIncome.description}
+            value={newExistingIncome.description}
             onChange={handleChangesToIncomeForm}
           />
         </div>
         <hr />
-        <button onClick={handleAddNewIncome}>Submit</button>
+        <button onClick={handleSubmitAddEditIncome}>Submit</button>
       </div>
     </div>
   );

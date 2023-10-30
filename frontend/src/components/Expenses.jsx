@@ -33,6 +33,7 @@ function Expenses() {
   return (
     <div className="expenses-1">
       {error && <p>Error loading expenses: {error}</p>}
+      <h2>Expenses</h2>
       <table style={{ border: "1px solid black" }}>
         <thead>
           <tr striped>
