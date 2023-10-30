@@ -18,6 +18,8 @@ function Expenses() {
   });
   const [editExpense, setEditExpense] = useState(false);
   const [allcategories, setAllCategories] = useState([]);
+  const [subcategoriesForCategory, setSubcategoriesForCategory] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState({});
 
   const url = `${getBackendURL()}/expenses`;
   useEffect(() => {
@@ -268,8 +270,8 @@ function Expenses() {
           <label>Recipient/Merchant:</label>
           <input
             type="text"
-            name="source"
-            className="source"
+            name="recipient"
+            className="recipient"
             value={newExistingExpense.recipient}
             onChange={handleChangesToExpenseForm}
           />
