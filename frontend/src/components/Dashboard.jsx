@@ -73,13 +73,17 @@ function Dashboard() {
     }
   };
 
-  useEffect(() => {
+  const fetchAll = async () => {
     try {
-      fetchCategories();
-      fetchExpensesData();
+      await fetchCategories();
+      await fetchExpensesData();
       setSearchFieldsChanged(false);
     } catch (e) {}
-  }, [searchFieldsChanged]);
+  };
+
+  useEffect(() => {
+    fetchAll();
+  }, []);
 
   useEffect(() => {
     try {
@@ -106,7 +110,6 @@ function Dashboard() {
         setChartData(data);
         console.log("----------");
       }
-      searchFieldsChanged = false;
     } catch (e) {}
   }, [searchFieldsChanged]);
 
