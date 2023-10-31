@@ -2,7 +2,7 @@
 Milestone 3
 
 # Name of App
- Budget buddy
+ Budget Buddy
 
 # Group Members 
 Eshita Islam, Adrian Mitre, David Aguirre, Serena Ally, Marisol Valenzuela
