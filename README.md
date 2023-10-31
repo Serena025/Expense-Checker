@@ -2,7 +2,7 @@
 Milestone 3
 
 # Name of App
- Budget buddie
+ Budget buddy
 
 # Group Members 
 Eshita Islam, Adrian Mitre, David Aguirre, Serena Ally, Marisol Valenzuela
@@ -74,7 +74,7 @@ Finally, in separate terminals, run npm start for the frontend and nodemon for t
 | /expenses| components/Expenses.jsx| track expenses |
 | /income | components/Income.jsx| track income |
 
-# Budget Buddy Website Created
+# Live App (running on AWS cloud)
 
 http://budgetbuddyfe.s3-website-us-west-1.amazonaws.com/
 
