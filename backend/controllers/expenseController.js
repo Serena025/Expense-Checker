@@ -119,6 +119,7 @@ expenseRouter.post("/", async (req, res) => {
       });
     }
   } catch (e) {
+    console.log("ESH - Expense error", e);
     res.status(500).json({
       message: `Expense could not be posted. Reason: Server error`,
     });
