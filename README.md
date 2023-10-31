@@ -8,9 +8,10 @@ Milestone 3
 Eshita Islam, Adrian Mitre, David Aguirre, Serena Ally, Marisol Valenzuela
 
 # Technologies Used
-Backend - Node.js/Express 
-Database - PostgreSQL/Sequelice (ORM)
-FrontEnd - React
+Backend - Node.js/Express  
+Database - PostgreSQL with Sequelize  
+FrontEnd - React  
+
 
 # Description of project
 We decided to work on expense checker which motivated by various reasons.One of the primary reasons for coding an expense checker is to gain better control over personal or business finances. By developing a tool to track and monitor expenses, you can get a clearer picture of where your money is going, which is crucial for budgeting, saving, and making informed financial decisions.
